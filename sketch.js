@@ -10,12 +10,11 @@ let searchMode;
 
 let canvasW;
 let canvasH;
-
 let isMobile;
 
 
 // ==============================
-// アクセント記号を無視して検索する
+// アクセント記号を無視して検索
 // ==============================
 
 function normalizeText(text) {
@@ -30,108 +29,7 @@ function normalizeText(text) {
 
 
 // ==============================
-// 2. 初期設定
-// ==============================
-
-function setup() {
-
-  setupLayout();
-
-  createCanvas(canvasW, canvasH);
-
-
-  // ------------------------------
-  // 入力欄
-  // ------------------------------
-
-  inputField = createInput('');
-
-  inputField.style('font-size', '16px');
-  inputField.style('border', '2px solid #a0b2c6');
-  inputField.style('border-radius', '20px');
-  inputField.style('padding-left', '15px');
-  inputField.style('outline', 'none');
-  inputField.style('box-sizing', 'border-box');
-
-
-  // ------------------------------
-  // 検索ボタン
-  // ------------------------------
-
-  searchButton = createButton('検索');
-
-  searchButton.style('background-color', '#4a76a8');
-  searchButton.style('color', '#ffffff');
-  searchButton.style('font-size', '16px');
-  searchButton.style('font-weight', 'bold');
-  searchButton.style('border', 'none');
-  searchButton.style('border-radius', '20px');
-  searchButton.style('cursor', 'pointer');
-
-  searchButton.mousePressed(searchWord);
-
-
-  // ------------------------------
-  // 検索方法の選択
-  // ------------------------------
-
-  searchMode = createRadio();
-
-  searchMode.option('exact', '完全一致');
-  searchMode.option('prefix', '前方一致');
-  searchMode.option('partial', '部分一致');
-
-  // 最初は「前方一致」
-  searchMode.selected('prefix');
-
-  searchMode.style('font-size', '14px');
-
-
-  // ------------------------------
-  // 検索結果ボックス
-  // ------------------------------
-
-  resultBox = createDiv(
-
-    "調べたい単語を入力して、<br>" +
-    "検索ボタンかEnterキーを押してね♬<br>" +
-    "(例: テンポ、音程)" +
-    "<br><br>" +
-    "Digite a palavra que deseja pesquisar e<br>" +
-    "clique no botão de pesquisa ou pressione Enter ♬<br>" +
-    "(Ex.: som, cavaco)"
-
-  );
-
-
-  resultBox.style('background-color', '#ffffff');
-  resultBox.style('border', '1px solid #e2e8f0');
-  resultBox.style('border-radius', '12px');
-
-  resultBox.style('padding', '10px');
-  resultBox.style('box-sizing', 'border-box');
-
-  // スクロール
-  resultBox.style('overflow-y', 'auto');
-
-  // 文字
-  resultBox.style('font-size', '16px');
-  resultBox.style('font-family', 'sans-serif');
-  resultBox.style('color', '#333333');
-  resultBox.style('line-height', '1.5');
-
-
-  // ------------------------------
-  // レイアウト調整
-  // ------------------------------
-
-  adjustElements();
-
-}
-
-
-// ==============================
-// 画面サイズを判定
+// 画面サイズを設定
 // ==============================
 
 function setupLayout() {
@@ -151,7 +49,6 @@ function setupLayout() {
 
   }
 
-
   else {
 
     // --------------------------
@@ -167,17 +64,204 @@ function setupLayout() {
 
 
 // ==============================
-// 入力欄・ボタン・結果ボックス
+// 初期設定
+// ==============================
+
+function setup() {
+
+  setupLayout();
+
+  createCanvas(canvasW, canvasH);
+
+
+  // ==============================
+  // 入力欄
+  // ==============================
+
+  inputField = createInput('');
+
+  inputField.style('font-size', '16px');
+  inputField.style('border', '2px solid #a0b2c6');
+  inputField.style('border-radius', '20px');
+  inputField.style('padding-left', '15px');
+  inputField.style('outline', 'none');
+  inputField.style('box-sizing', 'border-box');
+
+
+  // ==============================
+  // 検索ボタン
+  // ==============================
+
+  searchButton = createButton('検索');
+
+  searchButton.style(
+    'background-color',
+    '#4a76a8'
+  );
+
+  searchButton.style(
+    'color',
+    '#ffffff'
+  );
+
+  searchButton.style(
+    'font-size',
+    '16px'
+  );
+
+  searchButton.style(
+    'font-weight',
+    'bold'
+  );
+
+  searchButton.style(
+    'border',
+    'none'
+  );
+
+  searchButton.style(
+    'border-radius',
+    '20px'
+  );
+
+  searchButton.style(
+    'cursor',
+    'pointer'
+  );
+
+  searchButton.mousePressed(searchWord);
+
+
+  // ==============================
+  // 検索方法
+  // ==============================
+
+  searchMode = createRadio();
+
+  searchMode.option(
+    'exact',
+    '完全一致'
+  );
+
+  searchMode.option(
+    'prefix',
+    '前方一致'
+  );
+
+  searchMode.option(
+    'partial',
+    '部分一致'
+  );
+
+
+  // 最初は前方一致
+  searchMode.selected('prefix');
+
+  searchMode.style(
+    'font-size',
+    '14px'
+  );
+
+
+  // ==============================
+  // 検索結果ボックス
+  // ==============================
+
+  resultBox = createDiv(
+
+    "調べたい単語を入力して、<br>" +
+
+    "検索ボタンかEnterキーを押してね♬<br>" +
+
+    "(例: テンポ、音程)" +
+
+    "<br><br>" +
+
+    "Digite a palavra que deseja pesquisar e<br>" +
+
+    "clique no botão de pesquisa ou pressione Enter ♬<br>" +
+
+    "(Ex.: som, cavaco)"
+
+  );
+
+
+  resultBox.style(
+    'background-color',
+    '#ffffff'
+  );
+
+  resultBox.style(
+    'border',
+    '1px solid #e2e8f0'
+  );
+
+  resultBox.style(
+    'border-radius',
+    '12px'
+  );
+
+  resultBox.style(
+    'padding',
+    '10px'
+  );
+
+  resultBox.style(
+    'box-sizing',
+    'border-box'
+  );
+
+
+  // スクロール可能
+  resultBox.style(
+    'overflow-y',
+    'auto'
+  );
+
+
+  // 文字
+  resultBox.style(
+    'font-size',
+    '16px'
+  );
+
+  resultBox.style(
+    'font-family',
+    'sans-serif'
+  );
+
+  resultBox.style(
+    'color',
+    '#333333'
+  );
+
+  resultBox.style(
+    'line-height',
+    '1.5'
+  );
+
+
+  // ==============================
+  // 要素配置
+  // ==============================
+
+  adjustElements();
+
+}
+
+
+// ==============================
+// CanvasとHTML要素の配置
 // ==============================
 
 function adjustElements() {
 
-  // ------------------------------
-  // Canvasを中央上部に配置
-  // ------------------------------
-
   let canvas = document.querySelector('canvas');
 
+
+  // ------------------------------
+  // Canvas
+  // ------------------------------
 
   if (canvas) {
 
@@ -191,18 +275,21 @@ function adjustElements() {
   }
 
 
-  // ------------------------------
+  // ==============================
   // スマホ
-  // ------------------------------
+  // ==============================
 
   if (isMobile) {
 
+    // --------------------------
     // 入力欄
+    // --------------------------
+
     let inputW = canvasW - 170;
 
 
     inputField.position(
-      15,
+      ((windowWidth - canvasW) / 2) + 15,
       75
     );
 
@@ -213,10 +300,18 @@ function adjustElements() {
     );
 
 
+    // --------------------------
     // 検索ボタン
+    // --------------------------
+
     searchButton.position(
-      inputW + 25,
+
+      ((windowWidth - canvasW) / 2) +
+      inputW +
+      25,
+
       75
+
     );
 
 
@@ -226,17 +321,31 @@ function adjustElements() {
     );
 
 
+    // --------------------------
     // 検索方法
+    // --------------------------
+
     searchMode.position(
+
+      ((windowWidth - canvasW) / 2) +
       15,
+
       120
+
     );
 
 
+    // --------------------------
     // 結果ボックス
+    // --------------------------
+
     resultBox.position(
+
+      ((windowWidth - canvasW) / 2) +
       10,
+
       150
+
     );
 
 
@@ -248,9 +357,9 @@ function adjustElements() {
   }
 
 
-  // ------------------------------
+  // ==============================
   // PC
-  // ------------------------------
+  // ==============================
 
   else {
 
@@ -259,8 +368,12 @@ function adjustElements() {
     // --------------------------
 
     inputField.position(
+
+      ((windowWidth - canvasW) / 2) +
       35,
+
       90
+
     );
 
 
@@ -281,8 +394,12 @@ function adjustElements() {
     // --------------------------
 
     searchButton.position(
+
+      ((windowWidth - canvasW) / 2) +
       400,
+
       90
+
     );
 
 
@@ -303,8 +420,12 @@ function adjustElements() {
     // --------------------------
 
     searchMode.position(
+
+      ((windowWidth - canvasW) / 2) +
       35,
+
       145
+
     );
 
 
@@ -319,8 +440,12 @@ function adjustElements() {
     // --------------------------
 
     resultBox.position(
+
+      ((windowWidth - canvasW) / 2) +
       25,
+
       180
+
     );
 
 
@@ -341,7 +466,7 @@ function adjustElements() {
 
 
 // ==============================
-// 4. 画面描画
+// 画面描画
 // ==============================
 
 function draw() {
@@ -350,7 +475,7 @@ function draw() {
 
 
   // ------------------------------
-  // タイトル部分
+  // タイトル背景
   // ------------------------------
 
   fill('#4a76a8');
@@ -358,10 +483,12 @@ function draw() {
   noStroke();
 
   rect(
+
     0,
     0,
     width,
     isMobile ? 55 : 70
+
   );
 
 
@@ -389,7 +516,6 @@ function draw() {
 
   }
 
-
   else {
 
     textSize(26);
@@ -406,7 +532,7 @@ function draw() {
 
 
 // ==============================
-// 5. 検索
+// 検索
 // ==============================
 
 function searchWord() {
@@ -415,14 +541,14 @@ function searchWord() {
   // 入力された文字
   // ------------------------------
 
-  // ★ここでアクセント記号を無視する
+  // アクセント記号を無視する
   let word = normalizeText(
     inputField.value()
   );
 
 
   // ------------------------------
-  // 空欄の場合
+  // 空欄
   // ------------------------------
 
   if (word === "") {
@@ -437,68 +563,94 @@ function searchWord() {
 
 
   // ------------------------------
-  // 選択された検索方法
+  // 検索方法
   // ------------------------------
 
   let mode = searchMode.value();
 
 
-  // ------------------------------
-  // ポルトガル語・日本語の両方から検索
-  // ------------------------------
+  // ==============================
+  // 辞書から検索
+  // ==============================
 
-  let results = dictionary.filter(item => {
+  let results = dictionary.filter(
+    item => {
+
+      // --------------------------
+      // 辞書側もアクセントを無視
+      // --------------------------
+
+      let portuguese =
+        normalizeText(
+          item.portuguese
+        );
 
 
-    // ★辞書側もアクセントを無視して比較する
-    let portuguese =
-      normalizeText(item.portuguese);
-
-    let japanese =
-      normalizeText(item.japanese);
+      let japanese =
+        normalizeText(
+          item.japanese
+        );
 
 
-    // --------------------------
-    // 完全一致
-    // --------------------------
+      // --------------------------
+      // 完全一致
+      // --------------------------
 
-    if (mode === 'exact') {
+      if (mode === 'exact') {
 
-      return portuguese === word ||
-             japanese === word;
+        return (
+
+          portuguese === word ||
+
+          japanese === word
+
+        );
+
+      }
+
+
+      // --------------------------
+      // 前方一致
+      // --------------------------
+
+      else if (mode === 'prefix') {
+
+        return (
+
+          portuguese.startsWith(word) ||
+
+          japanese.startsWith(word)
+
+        );
+
+      }
+
+
+      // --------------------------
+      // 部分一致
+      // --------------------------
+
+      else if (mode === 'partial') {
+
+        return (
+
+          portuguese.includes(word) ||
+
+          japanese.includes(word)
+
+        );
+
+      }
+
+
+      return false;
 
     }
-
-
-    // --------------------------
-    // 前方一致
-    // --------------------------
-
-    else if (mode === 'prefix') {
-
-      return portuguese.startsWith(word) ||
-             japanese.startsWith(word);
-
-    }
-
-
-    // --------------------------
-    // 部分一致
-    // --------------------------
-
-    else if (mode === 'partial') {
-
-      return portuguese.includes(word) ||
-             japanese.includes(word);
-
-    }
-
-
-  });
+  );
 
 
   // ==============================
-  // 検索結果
+  // 検索結果あり
   // ==============================
 
   if (results.length > 0) {
@@ -506,53 +658,60 @@ function searchWord() {
     let html = "";
 
 
-    results.forEach((item, index) => {
-
-      html +=
-
-        "<div style='margin-bottom:20px;'>" +
+    results.forEach(
+      (item, index) => {
 
 
-        // --------------------------
-        // ポルトガル語
-        // --------------------------
+        html +=
 
-        "<div style='font-size:18px;'>" +
-
-        " " + item.portuguese +
-
-        "</div>" +
+          "<div style='margin-bottom:20px;'>" +
 
 
-        // --------------------------
-        // 日本語
-        // --------------------------
+          // ------------------------
+          // ポルトガル語
+          // ------------------------
 
-        "<div>" +
+          "<div style='font-size:18px;'>" +
 
-        " " + item.japanese +
+          item.portuguese +
 
-        "</div>" +
-
-
-        // --------------------------
-        // 説明
-        // --------------------------
-
-        "<div style='margin-top:5px; font-size:13px;'>" +
-
-        "💡 " + item.descriptionJP +
-
-        "<br>" +
-
-        "💡 " + item.descriptionPT +
-
-        "</div>" +
+          "</div>" +
 
 
-        "</div>";
+          // ------------------------
+          // 日本語
+          // ------------------------
 
-    });
+          "<div>" +
+
+          item.japanese +
+
+          "</div>" +
+
+
+          // ------------------------
+          // 説明
+          // ------------------------
+
+          "<div style='margin-top:5px; font-size:13px;'>" +
+
+          "💡 " +
+
+          item.descriptionJP +
+
+          "<br>" +
+
+          "💡 " +
+
+          item.descriptionPT +
+
+          "</div>" +
+
+
+          "</div>";
+
+      }
+    );
 
 
     resultBox.html(html);
@@ -561,14 +720,17 @@ function searchWord() {
 
 
   // ==============================
-  // 見つからなかった場合
+  // 検索結果なし
   // ==============================
 
   else {
 
     resultBox.html(
 
-      "🔍 「" + inputField.value() +
+      "🔍 「" +
+
+      inputField.value() +
+
       "」は見つかりませんでした。" +
 
       "<br><br>" +
@@ -583,14 +745,17 @@ function searchWord() {
 
 
 // ==============================
-// 6. Enterキー対応
+// Enterキー対応
 // ==============================
 
 function keyPressed() {
 
   if (
+
     keyCode === ENTER ||
+
     key === 'Enter'
+
   ) {
 
     searchWord();
@@ -601,7 +766,7 @@ function keyPressed() {
 
 
 // ==============================
-// 7. 画面サイズ変更対応
+// 画面サイズ変更
 // ==============================
 
 function windowResized() {
