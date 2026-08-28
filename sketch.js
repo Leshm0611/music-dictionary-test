@@ -3,6 +3,9 @@ let searchButton;
 let resultBox;
 let searchMode;
 
+let howToButton;
+let addWordButton;
+
 
 // ==================================================
 // 画面サイズ
@@ -373,9 +376,101 @@ function adjustElements() {
     searchMode.style(
       "font-size",
       "14px"
+    );  
+
+  // ==================================================
+  // 「使い方」「＋単語追加」ボタン
+  // ==================================================
+
+  howToButton = createButton("使い方");
+
+  howToButton.style(
+    "font-size",
+    "14px"
+  );
+
+  howToButton.style(
+    "background-color",
+    "#ffffff"
+  );
+
+  howToButton.style(
+    "color",
+    "#4a76a8"
+  );
+
+  howToButton.style(
+    "border",
+    "1px solid #a0b2c6"
+  );
+
+  howToButton.style(
+    "border-radius",
+    "15px"
+  );
+
+  howToButton.style(
+    "cursor",
+    "pointer"
+  );
+
+
+  addWordButton = createButton("＋単語追加");
+
+  addWordButton.style(
+    "font-size",
+    "14px"
+  );
+
+  addWordButton.style(
+    "background-color",
+    "#ffffff"
+  );
+
+  addWordButton.style(
+    "color",
+    "#4a76a8"
+  );
+
+  addWordButton.style(
+    "border",
+    "1px solid #a0b2c6"
+  );
+
+  addWordButton.style(
+    "border-radius",
+    "15px"
+  );
+
+  addWordButton.style(
+    "cursor",
+    "pointer"
+  );
+     // ----------------------------------------------
+    // 「使い方」「＋単語追加」
+    // ----------------------------------------------
+
+    howToButton.position(
+      canvasX + 15,
+      150
+    );
+
+    howToButton.size(
+      90,
+      30
     );
 
 
+    addWordButton.position(
+      canvasX + canvasW - 115,
+      150
+    );
+
+    addWordButton.size(
+      100,
+      30
+    );
+    
     // ----------------------------------------------
     // 結果ボックス
     // ----------------------------------------------
@@ -384,7 +479,7 @@ function adjustElements() {
 
       canvasX + 10,
 
-      150
+      190
 
     );
 
@@ -401,6 +496,31 @@ function adjustElements() {
     resultBox.style(
       "font-size",
       "16px"
+    );
+
+        // ----------------------------------------------
+    // 「使い方」「＋単語追加」
+    // ----------------------------------------------
+
+    howToButton.position(
+      canvasX + 35,
+      180
+    );
+
+    howToButton.size(
+      100,
+      32
+    );
+
+
+    addWordButton.position(
+      canvasX + canvasW - 135,
+      180
+    );
+
+    addWordButton.size(
+      110,
+      32
     );
 
   }
