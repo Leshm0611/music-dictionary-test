@@ -494,31 +494,40 @@ function searchWord() {
 
 function keyPressed() {
 
-  if (
-    keyCode === ENTER ||
-    key === 'Enter'
-  ) {
+  if (keyCode === ENTER || key === 'Enter') {
 
     searchWord();
 
   }
-
 }
 
 
-// ==============================
-// 7. 画面サイズ変更対応
-// ==============================
+// 画面サイズに合わせて各要素を配置
+function updateLayout() {
 
+  let canvasWidth = 420;
+
+  // Canvasを中央に配置したときの左端
+  let canvasX = (windowWidth - canvasWidth) / 2;
+
+  // 画面より左にはみ出さないようにする
+  if (canvasX < 0) {
+    canvasX = 0;
+  }
+
+  inputField.position(canvasX + 25, 75);
+
+  searchButton.position(canvasX + 285, 75);
+
+  searchMode.position(canvasX + 25, 120);
+
+  resultBox.position(canvasX + 35, 150);
+}
+
+
+// 画面の向き・サイズが変わったとき
 function windowResized() {
 
-  setupLayout();
-
-  resizeCanvas(
-    canvasW,
-    canvasH
-  );
-
-  adjustElements();
+  updateLayout();
 
 }
