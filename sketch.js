@@ -15,6 +15,21 @@ let isMobile;
 
 
 // ==============================
+// アクセント記号を無視して検索する
+// ==============================
+
+function normalizeText(text) {
+
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+
+}
+
+
+// ==============================
 // 2. 初期設定
 // ==============================
 
@@ -23,6 +38,7 @@ function setup() {
   setupLayout();
 
   createCanvas(canvasW, canvasH);
+
 
   // ------------------------------
   // 入力欄
@@ -76,6 +92,7 @@ function setup() {
   // ------------------------------
 
   resultBox = createDiv(
+
     "調べたい単語を入力して、<br>" +
     "検索ボタンかEnterキーを押してね♬<br>" +
     "(例: テンポ、音程)" +
@@ -83,7 +100,9 @@ function setup() {
     "Digite a palavra que deseja pesquisar e<br>" +
     "clique no botão de pesquisa ou pressione Enter ♬<br>" +
     "(Ex.: som, cavaco)"
+
   );
+
 
   resultBox.style('background-color', '#ffffff');
   resultBox.style('border', '1px solid #e2e8f0');
@@ -107,6 +126,7 @@ function setup() {
   // ------------------------------
 
   adjustElements();
+
 }
 
 
@@ -129,7 +149,10 @@ function setupLayout() {
     canvasW = min(420, windowWidth - 20);
     canvasH = 600;
 
-  } else {
+  }
+
+
+  else {
 
     // --------------------------
     // PC
@@ -150,10 +173,11 @@ function setupLayout() {
 function adjustElements() {
 
   // ------------------------------
-  // キャンバスを中央上部に配置
+  // Canvasを中央上部に配置
   // ------------------------------
 
   let canvas = document.querySelector('canvas');
+
 
   if (canvas) {
 
@@ -176,10 +200,12 @@ function adjustElements() {
     // 入力欄
     let inputW = canvasW - 170;
 
+
     inputField.position(
       15,
       75
     );
+
 
     inputField.size(
       inputW,
@@ -192,6 +218,7 @@ function adjustElements() {
       inputW + 25,
       75
     );
+
 
     searchButton.size(
       120,
@@ -212,6 +239,7 @@ function adjustElements() {
       150
     );
 
+
     resultBox.size(
       canvasW - 20,
       400
@@ -226,18 +254,21 @@ function adjustElements() {
 
   else {
 
-    // PCでは全体を大きくする
-
+    // --------------------------
     // 入力欄
+    // --------------------------
+
     inputField.position(
       35,
       90
     );
 
+
     inputField.size(
       350,
       42
     );
+
 
     inputField.style(
       'font-size',
@@ -245,16 +276,21 @@ function adjustElements() {
     );
 
 
+    // --------------------------
     // 検索ボタン
+    // --------------------------
+
     searchButton.position(
       400,
       90
     );
 
+
     searchButton.size(
       150,
       46
     );
+
 
     searchButton.style(
       'font-size',
@@ -262,11 +298,15 @@ function adjustElements() {
     );
 
 
+    // --------------------------
     // 検索方法
+    // --------------------------
+
     searchMode.position(
       35,
       145
     );
+
 
     searchMode.style(
       'font-size',
@@ -274,16 +314,21 @@ function adjustElements() {
     );
 
 
+    // --------------------------
     // 結果ボックス
+    // --------------------------
+
     resultBox.position(
       25,
       180
     );
 
+
     resultBox.size(
       canvasW - 50,
       500
     );
+
 
     resultBox.style(
       'font-size',
@@ -304,7 +349,9 @@ function draw() {
   background('#f4f6f9');
 
 
+  // ------------------------------
   // タイトル部分
+  // ------------------------------
 
   fill('#4a76a8');
 
@@ -318,7 +365,9 @@ function draw() {
   );
 
 
+  // ------------------------------
   // タイトル
+  // ------------------------------
 
   fill('#ffffff');
 
@@ -338,7 +387,10 @@ function draw() {
       27
     );
 
-  } else {
+  }
+
+
+  else {
 
     textSize(26);
 
@@ -359,62 +411,90 @@ function draw() {
 
 function searchWord() {
 
+  // ------------------------------
   // 入力された文字
+  // ------------------------------
 
- let word = normalizeText(inputField.value());
-
-
-// 空欄の場合
-if (word === "") {
-
-  resultBox.html(
-    "⚠️ 単語を入力してください。"
+  // ★ここでアクセント記号を無視する
+  let word = normalizeText(
+    inputField.value()
   );
 
-  return;
-}
+
+  // ------------------------------
+  // 空欄の場合
+  // ------------------------------
+
+  if (word === "") {
+
+    resultBox.html(
+      "⚠️ 単語を入力してください。"
+    );
+
+    return;
+
+  }
 
 
-// 選択された検索方法
-let mode = searchMode.value();
+  // ------------------------------
+  // 選択された検索方法
+  // ------------------------------
 
-// ポルトガル語・日本語の両方から検索
-let results = dictionary.filter(item => {
-
-  let portuguese = normalizeText(item.portuguese);
-  let japanese = normalizeText(item.japanese);
+  let mode = searchMode.value();
 
 
-      // 完全一致
+  // ------------------------------
+  // ポルトガル語・日本語の両方から検索
+  // ------------------------------
 
-      if (mode === 'exact') {
-
-        return portuguese === word ||
-               japanese === word;
-
-      }
+  let results = dictionary.filter(item => {
 
 
-      // 前方一致
+    // ★辞書側もアクセントを無視して比較する
+    let portuguese =
+      normalizeText(item.portuguese);
 
-      else if (mode === 'prefix') {
-
-        return portuguese.startsWith(word) ||
-               japanese.startsWith(word);
-
-      }
+    let japanese =
+      normalizeText(item.japanese);
 
 
-      // 部分一致
+    // --------------------------
+    // 完全一致
+    // --------------------------
 
-      else if (mode === 'partial') {
+    if (mode === 'exact') {
 
-        return portuguese.includes(word) ||
-               japanese.includes(word);
+      return portuguese === word ||
+             japanese === word;
 
-      }
+    }
 
-    });
+
+    // --------------------------
+    // 前方一致
+    // --------------------------
+
+    else if (mode === 'prefix') {
+
+      return portuguese.startsWith(word) ||
+             japanese.startsWith(word);
+
+    }
+
+
+    // --------------------------
+    // 部分一致
+    // --------------------------
+
+    else if (mode === 'partial') {
+
+      return portuguese.includes(word) ||
+             japanese.includes(word);
+
+    }
+
+
+  });
 
 
   // ==============================
@@ -432,19 +512,43 @@ let results = dictionary.filter(item => {
 
         "<div style='margin-bottom:20px;'>" +
 
+
+        // --------------------------
+        // ポルトガル語
+        // --------------------------
+
         "<div style='font-size:18px;'>" +
+
         " " + item.portuguese +
+
         "</div>" +
+
+
+        // --------------------------
+        // 日本語
+        // --------------------------
 
         "<div>" +
+
         " " + item.japanese +
+
         "</div>" +
 
+
+        // --------------------------
+        // 説明
+        // --------------------------
+
         "<div style='margin-top:5px; font-size:13px;'>" +
+
         "💡 " + item.descriptionJP +
+
         "<br>" +
+
         "💡 " + item.descriptionPT +
+
         "</div>" +
+
 
         "</div>";
 
@@ -456,11 +560,15 @@ let results = dictionary.filter(item => {
   }
 
 
+  // ==============================
+  // 見つからなかった場合
+  // ==============================
+
   else {
 
     resultBox.html(
 
-      "🔍 「" + word +
+      "🔍 「" + inputField.value() +
       "」は見つかりませんでした。" +
 
       "<br><br>" +
@@ -480,40 +588,31 @@ let results = dictionary.filter(item => {
 
 function keyPressed() {
 
-  if (keyCode === ENTER || key === 'Enter') {
+  if (
+    keyCode === ENTER ||
+    key === 'Enter'
+  ) {
 
     searchWord();
 
   }
+
 }
 
 
-// 画面サイズに合わせて各要素を配置
-function updateLayout() {
+// ==============================
+// 7. 画面サイズ変更対応
+// ==============================
 
-  let canvasWidth = 420;
-
-  // Canvasを中央に配置したときの左端
-  let canvasX = (windowWidth - canvasWidth) / 2;
-
-  // 画面より左にはみ出さないようにする
-  if (canvasX < 0) {
-    canvasX = 0;
-  }
-
-  inputField.position(canvasX + 25, 75);
-
-  searchButton.position(canvasX + 285, 75);
-
-  searchMode.position(canvasX + 25, 120);
-
-  resultBox.position(canvasX + 35, 150);
-}
-
-
-// 画面の向き・サイズが変わったとき
 function windowResized() {
 
-  updateLayout();
+  setupLayout();
+
+  resizeCanvas(
+    canvasW,
+    canvasH
+  );
+
+  adjustElements();
 
 }
