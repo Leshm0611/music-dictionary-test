@@ -361,42 +361,28 @@ function searchWord() {
 
   // 入力された文字
 
-  let word =
-    inputField
-      .value()
-      .trim()
-      .toLowerCase();
+ let word = normalizeText(inputField.value());
 
 
-  // 空欄の場合
+// 空欄の場合
+if (word === "") {
 
-  if (word === "") {
+  resultBox.html(
+    "⚠️ 単語を入力してください。"
+  );
 
-    resultBox.html(
-      "⚠️ 単語を入力してください。"
-    );
-
-    return;
-
-  }
+  return;
+}
 
 
-  // 選択された検索方法
+// 選択された検索方法
+let mode = searchMode.value();
 
-  let mode =
-    searchMode.value();
+// ポルトガル語・日本語の両方から検索
+let results = dictionary.filter(item => {
 
-
-  // ポルトガル語・日本語の両方から検索
-
-  let results =
-    dictionary.filter(item => {
-
-      let portuguese =
-        item.portuguese.toLowerCase();
-
-      let japanese =
-        item.japanese.toLowerCase();
+  let portuguese = normalizeText(item.portuguese);
+  let japanese = normalizeText(item.japanese);
 
 
       // 完全一致
