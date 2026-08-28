@@ -1,3 +1,4 @@
+```javascript
 let inputField;
 let searchButton;
 let resultBox;
@@ -158,13 +159,85 @@ function setup() {
     "部分一致"
   );
 
-
-  // 初期設定：前方一致
   searchMode.selected("prefix");
 
   searchMode.style(
     "font-size",
     "14px"
+  );
+
+
+  // ==================================================
+  // 「使い方」ボタン
+  // ==================================================
+
+  howToButton = createButton("使い方");
+
+  howToButton.style(
+    "font-size",
+    "14px"
+  );
+
+  howToButton.style(
+    "background-color",
+    "#ffffff"
+  );
+
+  howToButton.style(
+    "color",
+    "#4a76a8"
+  );
+
+  howToButton.style(
+    "border",
+    "1px solid #a0b2c6"
+  );
+
+  howToButton.style(
+    "border-radius",
+    "15px"
+  );
+
+  howToButton.style(
+    "cursor",
+    "pointer"
+  );
+
+
+  // ==================================================
+  // 「＋単語追加」ボタン
+  // ==================================================
+
+  addWordButton = createButton("＋単語追加");
+
+  addWordButton.style(
+    "font-size",
+    "14px"
+  );
+
+  addWordButton.style(
+    "background-color",
+    "#ffffff"
+  );
+
+  addWordButton.style(
+    "color",
+    "#4a76a8"
+  );
+
+  addWordButton.style(
+    "border",
+    "1px solid #a0b2c6"
+  );
+
+  addWordButton.style(
+    "border-radius",
+    "15px"
+  );
+
+  addWordButton.style(
+    "cursor",
+    "pointer"
   );
 
 
@@ -256,7 +329,7 @@ function setup() {
 
 
 // ==================================================
-// Canvas・検索欄・結果欄を配置
+// Canvas・各要素を配置
 // ==================================================
 
 function adjustElements() {
@@ -268,7 +341,9 @@ function adjustElements() {
 
   // 画面より左にはみ出さない
   if (canvasX < 0) {
+
     canvasX = 0;
+
   }
 
 
@@ -376,101 +451,53 @@ function adjustElements() {
     searchMode.style(
       "font-size",
       "14px"
-    );  
-
-  // ==================================================
-  // 「使い方」「＋単語追加」ボタン
-  // ==================================================
-
-  howToButton = createButton("使い方");
-
-  howToButton.style(
-    "font-size",
-    "14px"
-  );
-
-  howToButton.style(
-    "background-color",
-    "#ffffff"
-  );
-
-  howToButton.style(
-    "color",
-    "#4a76a8"
-  );
-
-  howToButton.style(
-    "border",
-    "1px solid #a0b2c6"
-  );
-
-  howToButton.style(
-    "border-radius",
-    "15px"
-  );
-
-  howToButton.style(
-    "cursor",
-    "pointer"
-  );
+    );
 
 
-  addWordButton = createButton("＋単語追加");
-
-  addWordButton.style(
-    "font-size",
-    "14px"
-  );
-
-  addWordButton.style(
-    "background-color",
-    "#ffffff"
-  );
-
-  addWordButton.style(
-    "color",
-    "#4a76a8"
-  );
-
-  addWordButton.style(
-    "border",
-    "1px solid #a0b2c6"
-  );
-
-  addWordButton.style(
-    "border-radius",
-    "15px"
-  );
-
-  addWordButton.style(
-    "cursor",
-    "pointer"
-  );
-     // ----------------------------------------------
-    // 「使い方」「＋単語追加」
+    // ----------------------------------------------
+    // 使い方
     // ----------------------------------------------
 
     howToButton.position(
+
       canvasX + 15,
+
       150
+
     );
+
 
     howToButton.size(
+
       90,
+
       30
+
     );
 
+
+    // ----------------------------------------------
+    // ＋単語追加
+    // ----------------------------------------------
 
     addWordButton.position(
+
       canvasX + canvasW - 115,
+
       150
+
     );
 
+
     addWordButton.size(
+
       100,
+
       30
+
     );
-    
+
+
     // ----------------------------------------------
     // 結果ボックス
     // ----------------------------------------------
@@ -496,31 +523,6 @@ function adjustElements() {
     resultBox.style(
       "font-size",
       "16px"
-    );
-
-        // ----------------------------------------------
-    // 「使い方」「＋単語追加」
-    // ----------------------------------------------
-
-    howToButton.position(
-      canvasX + 35,
-      180
-    );
-
-    howToButton.size(
-      100,
-      32
-    );
-
-
-    addWordButton.position(
-      canvasX + canvasW - 135,
-      180
-    );
-
-    addWordButton.size(
-      110,
-      32
     );
 
   }
@@ -608,6 +610,50 @@ function adjustElements() {
 
 
     // ----------------------------------------------
+    // 使い方
+    // ----------------------------------------------
+
+    howToButton.position(
+
+      canvasX + 35,
+
+      180
+
+    );
+
+
+    howToButton.size(
+
+      100,
+
+      32
+
+    );
+
+
+    // ----------------------------------------------
+    // ＋単語追加
+    // ----------------------------------------------
+
+    addWordButton.position(
+
+      canvasX + canvasW - 135,
+
+      180
+
+    );
+
+
+    addWordButton.size(
+
+      110,
+
+      32
+
+    );
+
+
+    // ----------------------------------------------
     // 結果ボックス
     // ----------------------------------------------
 
@@ -615,7 +661,7 @@ function adjustElements() {
 
       canvasX + 25,
 
-      180
+      220
 
     );
 
@@ -730,7 +776,7 @@ function searchWord() {
     inputField.value().trim();
 
 
-  // アクセント記号を無視した検索用文字
+  // アクセント記号を無視
   let word =
     normalizeText(originalWord);
 
@@ -764,11 +810,6 @@ function searchWord() {
 
   let results =
     dictionary.filter(item => {
-
-
-      // ----------------------------------------------
-      // 辞書側の文字もアクセントを無視
-      // ----------------------------------------------
 
       let portuguese =
         normalizeText(
@@ -849,7 +890,6 @@ function searchWord() {
 
     results.forEach(
       (item, index) => {
-
 
         html +=
 
@@ -974,3 +1014,4 @@ function windowResized() {
   adjustElements();
 
 }
+```
