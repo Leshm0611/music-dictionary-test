@@ -732,7 +732,7 @@ function draw() {
 
     text(
 
-      "📖 Português ⇄ 日本語 音楽辞書",
+      "📖 Português ⇄ 日本語 音楽用語辞典",
 
       20,
 
