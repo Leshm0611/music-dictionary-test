@@ -49,7 +49,7 @@ function setupLayout() {
 
     canvasW = min(420, windowWidth - 20);
 
-    canvasH = 600;
+    canvasH = 700;
 
   }
 
