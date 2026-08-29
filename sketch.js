@@ -1,4 +1,3 @@
-```javascript
 let inputField;
 let searchButton;
 let resultBox;
