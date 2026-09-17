@@ -177,7 +177,7 @@ function setup() {
 
   howToButton.style(
     "font-size",
-    "12px"
+    "14px"
   );
 
   howToButton.style(
@@ -214,7 +214,7 @@ function setup() {
 
   addWordButton.style(
     "font-size",
-    "12px"
+    "14px"
   );
 
   addWordButton.style(
