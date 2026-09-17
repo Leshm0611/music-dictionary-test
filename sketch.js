@@ -3,9 +3,10 @@ let searchButton;
 let resultBox;
 let searchMode;
 
-let howToButton;
+let howToButton;　//この下の4つは使い方ボタンや表示画面関係
 let addWordButton;
-
+let howToOverlay;
+let howToWindow;
 
 // ==================================================
 // 画面サイズ
@@ -97,7 +98,7 @@ function setup() {
   // 検索ボタン
   // ==================================================
 
-  searchButton = createButton("検索");
+  searchButton = createButton("検索/Procurar");
 
   searchButton.style(
     "background-color",
@@ -170,13 +171,13 @@ function setup() {
   // 「使い方」ボタン
   // ==================================================
 
-  howToButton = createButton("使い方");
+    howToButton = createButton("使い方/Como funciona");
 
   howToButton.mousePressed(showHowTo);
 
   howToButton.style(
     "font-size",
-    "14px"
+    "12px"
   );
 
   howToButton.style(
@@ -209,11 +210,11 @@ function setup() {
   // 「＋単語追加」ボタン
   // ==================================================
 
-  addWordButton = createButton("＋単語追加");
+  addWordButton = createButton("＋単語追加/Acrescentar palavras");
 
   addWordButton.style(
     "font-size",
-    "14px"
+    "12px"
   );
 
   addWordButton.style(
@@ -248,19 +249,21 @@ function setup() {
 
   resultBox = createDiv(
 
-    "調べたい単語を入力して、<br>" +
+    "🔎 調べたい言葉を入力してください。<br>" +
 
-    "検索ボタンかEnterキーを押してね♬<br>" +
+    "日本語・ポルトガル語どちらでも検索できます。<br>" +
 
-    "(例: テンポ、音程)" +
+    "検索ボタンまたはEnterキーで検索♬<br>" +
 
-    "<br><br>" +
+    "例：テンポ、音程、som、cavaco<br><br>" +
 
-    "Digite a palavra que deseja pesquisar e<br>" +
+    "🔎 Digite uma palavra para pesquisar.<br>" +
 
-    "clique no botão de pesquisa ou pressione Enter ♬<br>" +
+    "Pesquise em português ou japonês.<br>" +
 
-    "(Ex.: som, cavaco)"
+    "Clique em Procurar ou pressione Enter♬<br>" +
+
+    "Ex.: som、cavaco, テンポ、音程"
 
   );
 
@@ -371,7 +374,7 @@ function adjustElements() {
 
 
   // ==================================================
-  // スマホ
+  // スマホでの画面表示の設定
   // ==================================================
 
   if (isMobile) {
@@ -470,7 +473,7 @@ function adjustElements() {
 
     howToButton.size(
 
-      90,
+      100,
 
       30
 
@@ -483,7 +486,7 @@ function adjustElements() {
 
     addWordButton.position(
 
-      canvasX + canvasW - 115,
+      canvasX + canvasW - 145,
 
       150
 
@@ -492,7 +495,7 @@ function adjustElements() {
 
     addWordButton.size(
 
-      100,
+      130,
 
       30
 
@@ -528,9 +531,13 @@ function adjustElements() {
 
   }
 
+  // ==================================================
+  // スマホ画面ここまで？
+  // ==================================================  
+
 
   // ==================================================
-  // PC
+  // PC画面の設定、ここから
   // ==================================================
 
   else {
@@ -625,7 +632,7 @@ function adjustElements() {
 
     howToButton.size(
 
-      100,
+      150,
 
       32
 
@@ -638,7 +645,7 @@ function adjustElements() {
 
     addWordButton.position(
 
-      canvasX + canvasW - 135,
+      canvasX + canvasW - 230,
 
       180
 
@@ -647,7 +654,7 @@ function adjustElements() {
 
     addWordButton.size(
 
-      110,
+      200,
 
       32
 
@@ -685,6 +692,9 @@ function adjustElements() {
 
 }
 
+  // ==================================================
+  // PC画面の設定、ここまで？
+  // ==================================================
 
 // ==================================================
 // 画面描画
@@ -730,7 +740,7 @@ function draw() {
 
   if (isMobile) {
 
-    textSize(20);
+    textSize(18);
 
     text(
 
@@ -746,11 +756,11 @@ function draw() {
 
   else {
 
-    textSize(26);
+    textSize(20);
 
     text(
 
-      "📖 Português ⇄ 日本語 音楽辞書",
+      "📖 Português ⇄ 日本語 音楽用語辞典",
 
       30,
 
@@ -789,7 +799,8 @@ function searchWord() {
   if (word === "") {
 
     resultBox.html(
-      "⚠️ 単語を入力してください。"
+      "⚠️ 単語を入力してください。<br>" +
+      "⚠️ Digite uma palavra."
     );
 
     return;
@@ -964,9 +975,19 @@ function searchWord() {
 
       "」は見つかりませんでした。" +
 
-      "<br><br>" +
+      "<br>" +
 
-      "ポルトガル語または日本語で検索してみてね。"
+      "ポルトガル語または日本語で検索してみてね。<br><br>" +
+
+      "🔍 「" +
+
+      originalWord +
+
+      "」← Essa palavra não temos no dicionário." +
+
+      "<br>" +
+
+      "Digite outra palavra em português ou japonês."
 
     );
 
@@ -1017,92 +1038,220 @@ function windowResized() {
 }
 
 // ==================================================
-// 使い方ウィンドウ
+// 使い方ウィンドウを表示
 // ==================================================
 
 function showHowTo() {
 
-  let howToWindow = createDiv(
+  // ----------------------------------------------
+  // すでに開いていたら削除
+  // ----------------------------------------------
+
+  if (howToOverlay) {
+    howToOverlay.remove();
+    howToOverlay = null;
+  }
+
+  if (howToWindow) {
+    howToWindow.remove();
+    howToWindow = null;
+  }
+
+
+  // ==================================================
+  // 外側のオーバーレイ
+  // ==================================================
+
+  howToOverlay = createDiv("");
+
+  howToOverlay.style(
+    "position",
+    "fixed"
+  );
+
+  howToOverlay.style(
+    "left",
+    "0"
+  );
+
+  howToOverlay.style(
+    "top",
+    "0"
+  );
+
+  howToOverlay.style(
+    "width",
+    "100vw"
+  );
+
+  howToOverlay.style(
+    "height",
+    "100vh"
+  );
+
+  howToOverlay.style(
+    "background-color",
+    "rgba(0,0,0,0.25)"
+  );
+
+  howToOverlay.style(
+    "z-index",
+    "1000"
+  );
+
+
+  // ----------------------------------------------
+  // 外側をクリックしたら閉じる
+  // ----------------------------------------------
+
+  howToOverlay.mousePressed(
+    closeHowTo
+  );
+
+
+  // ==================================================
+  // 使い方ウィンドウ
+  // ==================================================
+
+  howToWindow = createDiv(
 
     "<div style='font-size:20px; font-weight:bold; margin-bottom:15px;'>" +
+
     "📖 辞書の使い方" +
+
     "</div>" +
+
 
     "<div style='font-size:15px; line-height:1.7;'>" +
 
-    "調べたい言葉を検索欄に入力してください。日本語でもポルトガル語でも検索可能。<br><br>" +
+    "調べたい言葉を検索欄に入力してください。<br>" +
+
+    "日本語でもポルトガル語でも検索できます。<br><br>" +
+
 
     "🔹 <b>完全一致</b><br>" +
+
     "入力した言葉と完全に一致する単語を検索します。<br><br>" +
 
+
     "🔹 <b>前方一致</b><br>" +
+
     "入力した文字から始まる単語を検索します。<br><br>" +
 
+
     "🔹 <b>部分一致</b><br>" +
+
     "入力した文字を含む単語を検索します。<br><br>" +
 
-    "💡 ポルトガル語は、アクセント記号を付けずに入力しても検索できます。<br><br>" +
+    "💡 ポルトガル語は、アクセント記号を付けずに入力しても検索できます。<br>" +
+    "💡 大文字と小文字を区別しない設定になっています。" +
 
-    "-------<br><br>" +
-
-        "<div style='font-size:20px; font-weight:bold; margin-bottom:15px;'>" +
-    "📖 Como usar o dicionário" +
     "</div>" +
+
+
+    "<br>" +
+
+    "<hr>" +
+
+    "<br>" +
+
+
+    "<div style='font-size:20px; font-weight:bold; margin-bottom:15px;'>" +
+
+    "📖 Como usar o dicionário" +
+
+    "</div>" +
+
 
     "<div style='font-size:15px; line-height:1.7;'>" +
 
-    "Digite a palavra que você quer pesquisar no campo de busca. É possível pesquisar tanto em japonês quanto em português.<br><br>" +
+    "Digite a palavra que você quer pesquisar no campo de busca. " +
+
+    "É possível pesquisar tanto em japonês quanto em português.<br><br>" +
 
     "*Da esquerda para a direita, a ordem é:<br>" +
-
     "🔹 <b>Correspondência exata</b><br>" +
+
     "Busca palavras que correspondem exatamente ao termo digitado.<br><br>" +
 
+
     "🔹 <b>Correspondência no início</b><br>" +
+
     "Busca palavras que começam com o termo digitado.<br><br>" +
 
+
     "🔹 <b>Correspondência parcial</b><br>" +
+
     "Busca palavras que contêm o termo digitado.<br><br>" +
+
 
     "💡 No português, você também pode pesquisar sem usar os acentos." +
 
     "</div>" +
 
+
     "<br>" +
 
-    "<button onclick='this.parentElement.remove()' " +
-    "style='padding:8px 20px; border:1px solid #a0b2c6; " +
-    "border-radius:15px; background:#ffffff; " +
-    "color:#4a76a8; cursor:pointer;'>" +
+    "<button id='closeHowTo' " +
+
+    "style='padding:8px 20px; " +
+
+    "border:1px solid #a0b2c6; " +
+
+    "border-radius:15px; " +
+
+    "background:#ffffff; " +
+
+    "color:#4a76a8; " +
+
+    "cursor:pointer;'>" +
+
     "閉じる" +
+
     "</button>"
 
   );
 
 
-  // ------------------------------
-  // ウィンドウの位置
-  // ------------------------------
+  // ==================================================
+  // ウィンドウのサイズ
+  // ==================================================
 
-  howToWindow.position(
-    canvasW / 2 - 170,
-    100
-  );
+  let modalW =
+    min(380, canvasW - 30);
 
 
-  // ------------------------------
-  // ウィンドウの大きさ
-  // ------------------------------
+  let modalH =
+    min(500, windowHeight - 120);
+
 
   howToWindow.size(
-    340,
-    400
+    modalW,
+    modalH
   );
 
 
-  // ------------------------------
-  // デザイン
-  // ------------------------------
+  // ==================================================
+  // ウィンドウの位置
+  // ==================================================
+
+  howToWindow.position(
+
+    (windowWidth - modalW) / 2,
+
+    60
+
+  );
+
+
+  // ==================================================
+  // ウィンドウのデザイン
+  // ==================================================
+
+  howToWindow.style(
+    "position",
+    "fixed"
+  );
 
   howToWindow.style(
     "background-color",
@@ -1136,7 +1285,7 @@ function showHowTo() {
 
   howToWindow.style(
     "z-index",
-    "1000"
+    "1001"
   );
 
   howToWindow.style(
@@ -1144,8 +1293,66 @@ function showHowTo() {
     "auto"
   );
 
+
+  // ==================================================
+  // ウィンドウ内部をクリックしても閉じない
+  // ==================================================
+
+  howToWindow.mousePressed(
+    function(event) {
+
+      event.stopPropagation();
+
+    }
+  );
+
+
+  // ==================================================
+  // 閉じるボタン
+  // ==================================================
+
+  let closeButton =
+    select("#closeHowTo");
+
+
+  closeButton.mousePressed(
+    function(event) {
+
+      event.stopPropagation();
+
+      closeHowTo();
+
+    }
+  );
+
+}
+
+
+// ==================================================
+// 使い方ウィンドウを閉じる
+// ==================================================
+
+function closeHowTo() {
+
+  if (howToWindow) {
+
+    howToWindow.remove();
+
+    howToWindow = null;
+
+  }
+
+
+  if (howToOverlay) {
+
+    howToOverlay.remove();
+
+    howToOverlay = null;
+
+  }
+
 }
 
 // ==================================================
-// 使い方ウィンドウここまで
+// 使い方ウィンドウを表示、はここまで
 // ==================================================
