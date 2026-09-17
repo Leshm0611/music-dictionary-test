@@ -473,7 +473,7 @@ function adjustElements() {
 
     howToButton.size(
 
-      120,
+      135,
 
       30
 
@@ -486,7 +486,7 @@ function adjustElements() {
 
     addWordButton.position(
 
-      canvasX + canvasW - 180,
+      canvasX + canvasW - 200,
 
       150
 
@@ -495,7 +495,7 @@ function adjustElements() {
 
     addWordButton.size(
 
-      160,
+      180,
 
       30
 
