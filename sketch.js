@@ -3,10 +3,14 @@ let searchButton;
 let resultBox;
 let searchMode;
 
-let howToButton;　//この下の4つは使い方ボタンや表示画面関係
+let howToButton;　//この下の4つは使い方ボタンや表示画面の設定関連
 let addWordButton;
 let howToOverlay;
 let howToWindow;
+
+let addWordOverlay;　//この下の３つは+単語追加ボタンの設定関連
+let addWordWindow;
+let addWordInput;
 
 // ==================================================
 // 画面サイズ
@@ -211,6 +215,8 @@ function setup() {
   // ==================================================
 
   addWordButton = createButton("＋単語追加/Acrescentar palavras");
+
+  addWordButton.mousePressed(showAddWord);
 
   addWordButton.style(
     "font-size",
@@ -1355,4 +1361,371 @@ function closeHowTo() {
 
 // ==================================================
 // 使い方ウィンドウを表示、はここまで
+// ==================================================
+
+// ==================================================
+// +単語追加ボタンのウィンドウを表示、はここから
+// ==================================================
+
+function showAddWord() {
+
+  // ----------------------------------------------
+  // すでに開いていたら削除
+  // ----------------------------------------------
+
+  if (addWordOverlay) {
+    addWordOverlay.remove();
+    addWordOverlay = null;
+  }
+
+  if (addWordWindow) {
+    addWordWindow.remove();
+    addWordWindow = null;
+  }
+
+
+  // ==================================================
+  // 外側のオーバーレイ
+  // ==================================================
+
+  addWordOverlay = createDiv("");
+
+  addWordOverlay.style(
+    "position",
+    "fixed"
+  );
+
+  addWordOverlay.style(
+    "left",
+    "0"
+  );
+
+  addWordOverlay.style(
+    "top",
+    "0"
+  );
+
+  addWordOverlay.style(
+    "width",
+    "100vw"
+  );
+
+  addWordOverlay.style(
+    "height",
+    "100vh"
+  );
+
+  addWordOverlay.style(
+    "background-color",
+    "rgba(0,0,0,0.25)"
+  );
+
+  addWordOverlay.style(
+    "z-index",
+    "1000"
+  );
+
+
+  // ----------------------------------------------
+  // 外側をクリックしたら閉じる
+  // ----------------------------------------------
+
+  addWordOverlay.mousePressed(
+    closeAddWord
+  );
+
+
+  // ==================================================
+  // 単語追加ウィンドウ
+  // ==================================================
+
+  addWordWindow = createDiv(
+
+    "<div style='font-size:20px; font-weight:bold; margin-bottom:15px;'>" +
+
+    "＋ 辞書に単語を追加" +
+
+    "</div>" +
+
+
+    "<div style='font-size:15px; line-height:1.7;'>" +
+
+    "辞書に追加したい単語を入力してください。<br><br>" +
+
+    "Digite a palavra que você gostaria de adicionar ao dicionário." +
+
+    "</div>" +
+
+
+    "<br>" +
+
+
+    "<input id='addWordInput' type='text' " +
+    "placeholder='単語を入力してください' " +
+    "style='width:100%; " +
+    "height:36px; " +
+    "box-sizing:border-box; " +
+    "padding:6px 10px; " +
+    "font-size:15px; " +
+    "border:1px solid #a0b2c6; " +
+    "border-radius:8px;'>" +
+
+
+    "<br><br>" +
+
+
+    "<button id='sendAddWord' " +
+    "style='padding:8px 18px; " +
+    "margin-right:8px; " +
+    "border:1px solid #a0b2c6; " +
+    "border-radius:15px; " +
+    "background:#ffffff; " +
+    "color:#4a76a8; " +
+    "cursor:pointer;'>" +
+
+    "送信する" +
+
+    "</button>" +
+
+
+    "<button id='cancelAddWord' " +
+    "style='padding:8px 18px; " +
+    "border:1px solid #a0b2c6; " +
+    "border-radius:15px; " +
+    "background:#ffffff; " +
+    "color:#4a76a8; " +
+    "cursor:pointer;'>" +
+
+    "キャンセルする" +
+
+    "</button>"
+
+  );
+
+
+  // ==================================================
+  // ウィンドウのサイズ
+  // ==================================================
+
+  let modalW =
+    min(380, canvasW - 30);
+
+
+  let modalH =
+    300;
+
+
+  // ==================================================
+  // ウィンドウの位置
+  // ==================================================
+
+  addWordWindow.position(
+
+    (windowWidth - modalW) / 2,
+
+    150
+
+  );
+
+
+  // ==================================================
+  // ウィンドウのサイズ
+  // ==================================================
+
+  addWordWindow.size(
+    modalW,
+    modalH
+  );
+
+
+  // ==================================================
+  // ウィンドウのデザイン
+  // ==================================================
+
+  addWordWindow.style(
+    "position",
+    "fixed"
+  );
+
+  addWordWindow.style(
+    "background-color",
+    "#ffffff"
+  );
+
+  addWordWindow.style(
+    "border",
+    "2px solid #a0b2c6"
+  );
+
+  addWordWindow.style(
+    "border-radius",
+    "15px"
+  );
+
+  addWordWindow.style(
+    "padding",
+    "20px"
+  );
+
+  addWordWindow.style(
+    "box-sizing",
+    "border-box"
+  );
+
+  addWordWindow.style(
+    "box-shadow",
+    "0 5px 20px rgba(0,0,0,0.2)"
+  );
+
+  addWordWindow.style(
+    "z-index",
+    "1001"
+  );
+
+
+  // ==================================================
+  // ウィンドウ内部をクリックしても閉じない
+  // ==================================================
+
+  addWordWindow.mousePressed(
+    function(event) {
+
+      event.stopPropagation();
+
+    }
+  );
+
+
+  // ==================================================
+  // 入力欄
+  // ==================================================
+
+  addWordInput =
+    select("#addWordInput");
+
+
+  // ==================================================
+  // キャンセルボタン
+  // ==================================================
+
+  let cancelButton =
+    select("#cancelAddWord");
+
+
+  cancelButton.mousePressed(
+    function(event) {
+
+      event.stopPropagation();
+
+      closeAddWord();
+
+    }
+  );
+
+
+  // ==================================================
+  // 送信ボタンと送信の設定ここから
+  // ==================================================
+
+  let sendButton =
+    select("#sendAddWord");
+
+sendButton.mousePressed(function(event) {
+
+  event.stopPropagation();
+
+  let word = addWordInput.value().trim();
+
+  if (word === "") {
+
+    alert("単語を入力してください。");
+
+    return;
+
+  }
+
+  fetch(
+    "https://leandroshimura.com/wp-json/music-dictionary/v1/add-word",
+    {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        word: word
+      })
+    }
+  )
+
+  .then(response => response.json())
+
+  .then(data => {
+
+    console.log("WordPressからの返答：", data);
+
+    if (data.success) {
+
+      alert(
+        "ありがとうございます！\n" +
+        "「" + word + "」を受け取りました。"
+      );
+
+      closeAddWord();
+
+    } else {
+
+      alert(
+        "送信できませんでした。"
+      );
+
+    }
+
+  })
+
+  .catch(error => {
+
+    console.error(error);
+
+    alert(
+      "送信中にエラーが発生しました。"
+    );
+
+  });
+
+});
+
+  //単語送信の設定ここまで
+  
+}
+
+
+// ==================================================
+// 単語追加ウィンドウを閉じる
+// ==================================================
+
+function closeAddWord() {
+
+  if (addWordWindow) {
+
+    addWordWindow.remove();
+
+    addWordWindow = null;
+
+  }
+
+
+  if (addWordOverlay) {
+
+    addWordOverlay.remove();
+
+    addWordOverlay = null;
+
+  }
+
+}
+
+// ==================================================
+// +単語追加ボタンのウィンドウを表示、はここまで
 // ==================================================
