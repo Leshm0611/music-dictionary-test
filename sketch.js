@@ -1132,9 +1132,7 @@ function showHowTo() {
 
     "<div style='font-size:15px; line-height:1.7;'>" +
 
-    "調べたい言葉を検索欄に入力してください。<br>" +
-
-    "日本語でもポルトガル語でも検索できます。<br><br>" +
+    "調べたい言葉を検索欄に入力してください。日本語でもポルトガル語でも検索できます。<br><br>" +
 
 
     "🔹 <b>完全一致</b><br>" +
@@ -1151,7 +1149,7 @@ function showHowTo() {
 
     "入力した文字を含む単語を検索します。<br><br>" +
     
-    "💡 「？」をクリックすると、辞書の使い方を知ることができます。<br>" +
+    "💡 「？」をクリックすると、辞書の使い方ページが開きます。<br>" +
     "💡 「＋」をクリックすると、辞書にない単語を追加リクエストできます。<br>" +
     "💡 ポルトガル語は、アクセント記号を付けずに入力しても検索できます。<br>" +
     "💡 大文字と小文字を区別しない設定になっています。" +
@@ -1448,32 +1446,30 @@ function showAddWord() {
 
     "<div style='font-size:20px; font-weight:bold; margin-bottom:15px;'>" +
 
-    "＋ 辞書に単語を追加" +
+    "単語を追加/Adicionar palavra" +
 
     "</div>" +
 
 
     "<div style='font-size:15px; line-height:1.7;'>" +
 
-    "辞書に追加したい単語を入力してください。<br><br>" +
+    "検索しても見つからない単語を入力してください。次回アップデート時に追加いたします。"<br><br>" +
 
-    "Digite a palavra que você gostaria de adicionar ao dicionário." +
+    "Digite a palavra que você gostaria de adicionar ao dicionário. Será adicionada na próxima atualização." +
 
     "</div>" +
 
 
     "<br>" +
 
-
-    "<input id='addWordInput' type='text' " +
-    "placeholder='単語を入力してください' " +
-    "style='width:100%; " +
-    "height:36px; " +
-    "box-sizing:border-box; " +
-    "padding:6px 10px; " +
-    "font-size:15px; " +
-    "border:1px solid #a0b2c6; " +
-    "border-radius:8px;'>" +
+    //この下の8行は単語追加ページに関する内容。
+    "<textarea id='addWordInput' placeholder='単語を入力してください' 
+    style='width:100%; height:70px; 
+    box-sizing:border-box; padding:8px 10px; 
+    font-size:15px; border:1px solid #a0b2c6; 
+    border-radius:8px; 
+    resize:vertical; 
+    font-family:inherit;'></textarea>" +
 
 
     "<br><br>" +
