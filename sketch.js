@@ -684,9 +684,9 @@ resultCountText.size(
 
     );
 
-    // ----------------------------------------------
-    // ヒット件数
-    // ----------------------------------------------
+// ==================================================
+// ヒット件数に関する設定、はここから
+// ==================================================　
 
 resultCountText.position(
   canvasX + canvasW - 60,
@@ -697,6 +697,19 @@ resultCountText.size(
   50,
   32
 );
+
+resultCountText = createDiv("");
+
+resultCountText.style("font-size", "14px");
+resultCountText.style("color", "#4a76a8");
+resultCountText.style("font-weight", "bold");
+resultCountText.style("text-align", "center");
+resultCountText.style("line-height", "30px");
+resultCountText.style("white-space", "nowrap");
+
+// ==================================================
+// ヒット件数に関する設定、はここまで
+// ==================================================　
 
 
     // ----------------------------------------------
@@ -873,6 +886,8 @@ function searchWord() {
         );
 
 
+      
+
       // ----------------------------------------------
       // 完全一致
       // ----------------------------------------------
@@ -928,7 +943,9 @@ function searchWord() {
 
     });
 
-
+  // ヒット件数を表示
+resultCountText.html(results.length + "件");
+  
   // ==================================================
   // 検索結果あり
   // ==================================================
@@ -1754,19 +1771,4 @@ function closeAddWord() {
 // +単語追加ボタンのウィンドウを表示、はここまで
 // ==================================================
 
-// ==================================================
-// ヒット件数に関する設定、はここから
-// ==================================================　
 
-resultCountText = createDiv("");
-
-resultCountText.style("font-size", "14px");
-resultCountText.style("color", "#4a76a8");
-resultCountText.style("font-weight", "bold");
-resultCountText.style("text-align", "center");
-resultCountText.style("line-height", "30px");
-resultCountText.style("white-space", "nowrap");
-
-// ==================================================
-// ヒット件数に関する設定、はここまで
-// ==================================================　
