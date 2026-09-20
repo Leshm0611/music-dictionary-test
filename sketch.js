@@ -967,7 +967,7 @@ function searchWord() {
 
   //ヒット件数に関する設定3行だけ
   resultCountText.html(
-  results.length + "件"
+  results.length + "件見つかりました。"
 );
   
   // ==================================================
