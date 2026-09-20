@@ -116,7 +116,7 @@ function setup() {
 
   searchButton.style(
     "font-size",
-    "16px"
+    "14px"
   );
 
   searchButton.style(
@@ -175,7 +175,7 @@ function setup() {
   // 「使い方」ボタン
   // ==================================================
 
-    howToButton = createButton("使い方/Como funciona");
+    howToButton = createButton("？");
 
   howToButton.mousePressed(showHowTo);
 
@@ -214,7 +214,7 @@ function setup() {
   // 「＋単語追加」ボタン
   // ==================================================
 
-  addWordButton = createButton("＋単語追加/Acrescentar palavras");
+  addWordButton = createButton("＋");
 
   addWordButton.mousePressed(showAddWord);
 
@@ -255,6 +255,8 @@ function setup() {
 
   resultBox = createDiv(
 
+    "<br>" +
+    
     "🔎 調べたい言葉を入力してください。<br>" +
 
     "日本語・ポルトガル語どちらでも検索できます。<br>" +
@@ -1148,7 +1150,9 @@ function showHowTo() {
     "🔹 <b>部分一致</b><br>" +
 
     "入力した文字を含む単語を検索します。<br><br>" +
-
+    
+    "💡 「？」をクリックすると、辞書の使い方を知ることができます。<br>" +
+    "💡 「＋」をクリックすると、辞書にない単語を追加リクエストできます。<br>" +
     "💡 ポルトガル語は、アクセント記号を付けずに入力しても検索できます。<br>" +
     "💡 大文字と小文字を区別しない設定になっています。" +
 
@@ -1190,7 +1194,8 @@ function showHowTo() {
 
     "Busca palavras que contêm o termo digitado.<br><br>" +
 
-
+    "💡 Clique em “?” para saber como usar o dicionário.<br>" +
+    "💡 Clique em “＋” para solicitar a inclusão de uma palavra que não está no dicionário.<br>" +
     "💡 No português, você também pode pesquisar sem usar os acentos." +
 
     "</div>" +
