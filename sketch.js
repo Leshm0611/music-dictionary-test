@@ -467,7 +467,7 @@ function adjustElements() {
 
 
     // ----------------------------------------------
-    // 使い方
+    // 使い方、「？」ボタン
     // ----------------------------------------------
 
     howToButton.position(
@@ -481,7 +481,7 @@ function adjustElements() {
 
     howToButton.size(
 
-      135,
+      32,
 
       30
 
@@ -489,12 +489,12 @@ function adjustElements() {
 
 
     // ----------------------------------------------
-    // ＋単語追加
+    // ＋単語追加、「＋」ボタン
     // ----------------------------------------------
 
     addWordButton.position(
 
-      canvasX + canvasW - 200,
+      canvasX + canvasW - 180,
 
       150
 
@@ -503,7 +503,7 @@ function adjustElements() {
 
     addWordButton.size(
 
-      180,
+      32,
 
       30
 
@@ -626,7 +626,7 @@ function adjustElements() {
 
 
     // ----------------------------------------------
-    // 使い方
+    // 使い方、「？」ボタン
     // ----------------------------------------------
 
     howToButton.position(
@@ -640,7 +640,7 @@ function adjustElements() {
 
     howToButton.size(
 
-      170,
+      34,
 
       32
 
@@ -648,12 +648,12 @@ function adjustElements() {
 
 
     // ----------------------------------------------
-    // ＋単語追加
+    // ＋単語追加、「＋」ボタン
     // ----------------------------------------------
 
     addWordButton.position(
 
-      canvasX + canvasW - 260,
+      canvasX + canvasW - 180,
 
       180
 
@@ -662,7 +662,7 @@ function adjustElements() {
 
     addWordButton.size(
 
-      230,
+      34,
 
       32
 
