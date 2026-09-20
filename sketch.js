@@ -250,6 +250,46 @@ function setup() {
     "pointer"
   );
 
+// ==================================================
+// ヒット件数表示
+// ==================================================
+
+resultCountText = createDiv("");
+
+resultCountText.style(
+  "font-size",
+  "14px"
+);
+
+resultCountText.style(
+  "color",
+  "#4a76a8"
+);
+
+resultCountText.style(
+  "font-weight",
+  "bold"
+);
+
+resultCountText.style(
+  "text-align",
+  "center"
+);
+
+resultCountText.style(
+  "line-height",
+  "30px"
+);
+
+resultCountText.style(
+  "white-space",
+  "nowrap"
+);
+
+// ==================================================
+// ヒット件数表示ここまで
+// ==================================================
+
   // ==================================================
   // 検索結果ボックス
   // ==================================================
@@ -510,6 +550,18 @@ function adjustElements() {
 
     );
 
+    // ヒット件数
+resultCountText.position(
+  canvasX + canvasW - 50,
+  150
+);
+
+resultCountText.size(
+  45,
+  30
+);
+    // ヒット件数ここまで
+
     // ----------------------------------------------
     // 結果ボックス
     // ----------------------------------------------
@@ -668,6 +720,18 @@ function adjustElements() {
 
     );
 
+    // ヒット件数
+resultCountText.position(
+  canvasX + canvasW - 55,
+  180
+);
+
+resultCountText.size(
+  50,
+  32
+);
+        // ヒット件数ここまで
+
     // ----------------------------------------------
     // 結果ボックス
     // ----------------------------------------------
@@ -805,6 +869,8 @@ function searchWord() {
 
   if (word === "") {
 
+      resultCountText.html("");
+
     resultBox.html(
       "⚠️ 単語を入力してください。<br>" +
       "⚠️ Digite uma palavra."
@@ -898,6 +964,11 @@ function searchWord() {
       return false;
 
     });
+
+  //ヒット件数に関する設定3行だけ
+  resultCountText.html(
+  results.length + "件"
+);
   
   // ==================================================
   // 検索結果あり
