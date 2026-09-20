@@ -250,20 +250,6 @@ function setup() {
     "pointer"
   );
 
-  // ----------------------------------------------
-  // ヒット件数
-  // ----------------------------------------------
-
-resultCountText.position(
-  canvasX + canvasW - 55,
-  150
-);
-
-resultCountText.size(
-  50,
-  30
-);
-
   // ==================================================
   // 検索結果ボックス
   // ==================================================
@@ -682,34 +668,6 @@ function adjustElements() {
 
     );
 
-// ==================================================
-// ヒット件数に関する設定、はここから
-// ==================================================　
-
-resultCountText.position(
-  canvasX + canvasW - 60,
-  180
-);
-
-resultCountText.size(
-  50,
-  32
-);
-
-resultCountText = createDiv("");
-
-resultCountText.style("font-size", "14px");
-resultCountText.style("color", "#4a76a8");
-resultCountText.style("font-weight", "bold");
-resultCountText.style("text-align", "center");
-resultCountText.style("line-height", "30px");
-resultCountText.style("white-space", "nowrap");
-
-// ==================================================
-// ヒット件数に関する設定、はここまで
-// ==================================================　
-
-
     // ----------------------------------------------
     // 結果ボックス
     // ----------------------------------------------
@@ -940,9 +898,6 @@ function searchWord() {
       return false;
 
     });
-
-  // ヒット件数を表示
-resultCountText.html(results.length + "件");
   
   // ==================================================
   // 検索結果あり
