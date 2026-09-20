@@ -1453,7 +1453,7 @@ function showAddWord() {
 
     "<div style='font-size:15px; line-height:1.7;'>" +
 
-    "検索しても見つからない単語を入力してください。次回アップデート時に追加いたします。"<br><br>" +
+    "検索しても見つからない単語を入力してください。次回アップデート時に追加いたします。<br><br>" +
 
     "Digite a palavra que você gostaria de adicionar ao dicionário. Será adicionada na próxima atualização." +
 
@@ -1462,15 +1462,8 @@ function showAddWord() {
 
     "<br>" +
 
-    //この下の8行は単語追加ページに関する内容。
-    "<textarea id='addWordInput' placeholder='単語を入力してください' 
-    style='width:100%; height:70px; 
-    box-sizing:border-box; padding:8px 10px; 
-    font-size:15px; border:1px solid #a0b2c6; 
-    border-radius:8px; 
-    resize:vertical; 
-    font-family:inherit;'></textarea>" +
-
+  // この下の行は単語追加ページに関する内容。
+  "<textarea id='addWordInput' placeholder='単語を入力してください' style='width:100%; height:70px; box-sizing:border-box; padding:8px 10px; font-size:15px; border:1px solid #a0b2c6; border-radius:8px; resize:vertical; font-family:inherit;'></textarea>" +
 
     "<br><br>" +
 
