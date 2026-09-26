@@ -169,7 +169,7 @@ function setup() {
 
   searchMode.style(
     "font-size",
-    "14px"
+    "13px"
   );
 
 
