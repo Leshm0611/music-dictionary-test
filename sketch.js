@@ -303,7 +303,7 @@ resultCountText.style(
     "検索ボタンまたはEnterキーで検索♬<br>" +
     "例：テンポ、音程、som、cavaco<br><br>" +
     "[？]を押すと使い方ガイドを表示できます。" +
-    "[＋]を押すと新しい単語の登録申請ができます。"
+    "[＋]を押すと新しい単語の登録申請ができます。" +
 
     "🔎 Digite uma palavra para pesquisar.<br>" +
     "Pesquise em português ou japonês.<br>" +
@@ -826,7 +826,7 @@ function draw() {
 
   else {
 
-    textSize(16);
+    textSize(17);
 
     text(
 
@@ -1741,7 +1741,7 @@ sendButton.mousePressed(function(event) {
     } else {
 
       alert(
-        "送信できませんでした。"
+        "送信できませんでした。Não foi enviado..."
       );
 
     }
@@ -1753,7 +1753,7 @@ sendButton.mousePressed(function(event) {
     console.error(error);
 
     alert(
-      "送信中にエラーが発生しました。"
+      "送信中にエラーが発生しました。Erro..."
     );
 
   });
