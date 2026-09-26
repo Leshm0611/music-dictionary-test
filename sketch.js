@@ -295,8 +295,6 @@ resultCountText.style(
   // ==================================================
 
   resultBox = createDiv(
-
-    "<br>" +
     
     "🔎 調べたい言葉を入力してください。<br>" +
     "日本語・ポルトガル語どちらでも検索できます。<br>" +
@@ -1255,12 +1253,12 @@ function showHowTo() {
 
     "🔹 <b>Correspondência no início</b><br>" +
 
-    "Busca palavras que começam com o termo digitado.<br><br>" +
+    "Buscar termos que começam com a palavra digitada..<br><br>" +
 
 
     "🔹 <b>Correspondência parcial</b><br>" +
 
-    "Busca palavras que contêm o termo digitado.<br><br>" +
+    "Busca termos que contêm a palavra digitada.<br><br>" +
 
     "💡 Clique em “?” para saber como usar o dicionário.<br>" +
     "💡 Clique em “＋” para solicitar a inclusão de uma palavra que não está no dicionário.<br>" +
