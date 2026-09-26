@@ -815,7 +815,7 @@ function draw() {
 
     text(
 
-      "📖 BR-PT ⇄ JP 音楽用語辞典 Dicionário de termos musicais",
+      "📖 Dicionário de Termos Musicais (PT-BR ⇄ JP) | 音楽用語辞典",
 
       20,
 
@@ -831,7 +831,7 @@ function draw() {
 
     text(
 
-      "📖 BR-PT ⇄ JP 音楽用語辞典 Dicionário de termos musicais",
+      "📖 Dicionário de Termos Musicais (PT-BR ⇄ JP) | 音楽用語辞典",
 
       30,
 
@@ -1577,20 +1577,20 @@ function showAddWord() {
 
 
   let modalH =
-    300;
+    min(380, windowHeight - 80);
 
 
   // ==================================================
   // ウィンドウの位置
   // ==================================================
 
+  let modalY =
+    (windowHeight - modalH) / 2;
+
   addWordWindow.position(
-
     (windowWidth - modalW) / 2,
-
-    150
-
-  );
+    modalY
+);
 
 
   // ==================================================
@@ -1608,9 +1608,9 @@ function showAddWord() {
   // ==================================================
 
   addWordWindow.style(
-    "position",
-    "fixed"
-  );
+    "overflow-y",
+    "auto"
+);
 
   addWordWindow.style(
     "background-color",
