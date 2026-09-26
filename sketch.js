@@ -522,7 +522,7 @@ function adjustElements() {
 
     howToButton.size(
 
-      45,
+      65,
 
       30
 
@@ -544,7 +544,7 @@ function adjustElements() {
 
     addWordButton.size(
 
-      45,
+      65,
 
       30
 
@@ -552,7 +552,7 @@ function adjustElements() {
 
     // ヒット件数
 resultCountText.position(
-  canvasX + canvasW - 50,
+  canvasX + canvasW - 150,
   150
 );
 
@@ -692,7 +692,7 @@ resultCountText.size(
 
     howToButton.size(
 
-      45,
+      65,
 
       32
 
@@ -714,7 +714,7 @@ resultCountText.size(
 
     addWordButton.size(
 
-      45,
+      65,
 
       32
 
@@ -722,7 +722,7 @@ resultCountText.size(
 
     // ヒット件数
 resultCountText.position(
-  canvasX + canvasW - 55,
+  canvasX + canvasW - 155,
   180
 );
 
@@ -811,11 +811,11 @@ function draw() {
 
   if (isMobile) {
 
-    textSize(18);
+    textSize(16);
 
     text(
 
-      "📖 Português ⇄ 日本語 音楽用語辞典",
+      "📖 BR-PT ⇄ JP 音楽用語辞典 Dicionário de termos musicais",
 
       20,
 
@@ -827,11 +827,11 @@ function draw() {
 
   else {
 
-    textSize(20);
+    textSize(46);
 
     text(
 
-      "📖 Português ⇄ 日本語 音楽用語辞典",
+      "📖 BR-PT ⇄ JP 音楽用語辞典 Dicionário de termos musicais",
 
       30,
 
@@ -967,7 +967,7 @@ function searchWord() {
 
   //ヒット件数に関する設定3行だけ
   resultCountText.html(
-  results.length + "件見つかりました。"
+  results.length + "resultados / 件"
 );
   
   // ==================================================
@@ -1734,7 +1734,7 @@ sendButton.mousePressed(function(event) {
 
       alert(
         "ありがとうございます！\n" +
-        "「" + word + "」を受け取りました。"
+        "「" + word + "」を受け取りました。Palavra enviada com sucesso!"
       );
 
       closeAddWord();
