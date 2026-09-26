@@ -827,7 +827,7 @@ function draw() {
 
   else {
 
-    textSize(46);
+    textSize(16);
 
     text(
 
@@ -967,7 +967,7 @@ function searchWord() {
 
   //ヒット件数に関する設定3行だけ
   resultCountText.html(
-  results.length + "resultados / 件"
+  results.length + " resultados / 件"
 );
   
   // ==================================================
