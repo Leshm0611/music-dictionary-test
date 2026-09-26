@@ -152,17 +152,17 @@ function setup() {
 
   searchMode.option(
     "exact",
-    "完全一致"
+    "完全一致/Exata"
   );
 
   searchMode.option(
     "prefix",
-    "前方一致"
+    "前方一致/Início"
   );
 
   searchMode.option(
     "partial",
-    "部分一致"
+    "部分一致/Parcial"
   );
 
   searchMode.selected("prefix");
@@ -299,20 +299,19 @@ resultCountText.style(
     "<br>" +
     
     "🔎 調べたい言葉を入力してください。<br>" +
-
     "日本語・ポルトガル語どちらでも検索できます。<br>" +
-
     "検索ボタンまたはEnterキーで検索♬<br>" +
-
     "例：テンポ、音程、som、cavaco<br><br>" +
+    "[？]を押すと使い方ガイドを表示できます。" +
+    "[＋]を押すと新しい単語の登録申請ができます。"
 
     "🔎 Digite uma palavra para pesquisar.<br>" +
-
     "Pesquise em português ou japonês.<br>" +
-
     "Clique em Procurar ou pressione Enter♬<br>" +
-
-    "Ex.: som、cavaco, テンポ、音程"
+    "Ex.: som、cavaco, テンポ、音程" +
+    "Clique no [？] para visualizar o guia de uso. " +
+    "Clique no [＋] para cadastrar uma nova palavra."
+    
 
   );
 
